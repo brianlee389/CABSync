@@ -9,12 +9,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.support.v4.app.NavUtils;
 import android.support.v4.app.NotificationCompat;
 
 public class EventMainActivity extends Activity {
 	private Button addEvent, writeReview;
+	private TextView eventSummary;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +27,9 @@ public class EventMainActivity extends Activity {
 		
 		addEvent = (Button) findViewById(R.id.addEvent);
 		writeReview = (Button) findViewById(R.id.writeButton);
+		eventSummary = (TextView)findViewById(R.id.textView1);
+		
+		eventSummary.setText(getIntent().getStringExtra("Event Description"));
 		
 		//Press to go to review main activity
 		writeReview.setOnClickListener(new OnClickListener(){

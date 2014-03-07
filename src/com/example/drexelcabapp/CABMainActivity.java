@@ -92,10 +92,11 @@ public class CABMainActivity extends Activity {
 		listView.setAdapter(adapter);
 		listView.setClickable(true);
 		listView.setOnItemClickListener(new OnItemClickListener(){
-			public void onItemClick(AdapterView<?> parent, View view, int postition, long id){
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id){
 				//On click will move to another screen to display event in detail
 				//Call a new activity's onCreate for that screen
 				Intent intent = new Intent(CABMainActivity.this,EventMainActivity.class);
+				intent.putExtra("Event Description", adapter.getItem(position).getDescription());
 				startActivity(intent);
 				Toast.makeText(CABMainActivity.this, "to EventMainActivity", Toast.LENGTH_LONG).show();
 			}
