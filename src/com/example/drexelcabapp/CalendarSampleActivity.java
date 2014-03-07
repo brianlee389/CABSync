@@ -1,4 +1,4 @@
-package com.example.drexelcabapp;
+/*package com.example.drexelcabapp;
 
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.api.client.extensions.android.http.AndroidHttp;
@@ -126,7 +126,7 @@ public final class CalendarSampleActivity extends Activity {
 			  events.remove(i);
 		  }
 	  } */
-	  Collections.sort(events, new EventComparer());
+/*	  Collections.sort(events, new EventComparer());
 	  adapter.clear();
 	  adapter.addAll(events);
 	  adapter.notifyDataSetChanged();
@@ -194,7 +194,7 @@ public final class CalendarSampleActivity extends Activity {
     return super.onOptionsItemSelected(item);
   }*/
 
-  /** Check that Google Play services APK is installed and up to date. */
+  /** Check that Google Play services APK is installed and up to date. 
   private boolean checkGooglePlayServicesAvailable() {
     final int connectionStatusCode = GooglePlayServicesUtil.isGooglePlayServicesAvailable(this);
     if (GooglePlayServicesUtil.isUserRecoverableError(connectionStatusCode)) {
@@ -218,4 +218,4 @@ public final class CalendarSampleActivity extends Activity {
   private void chooseAccount() {
     startActivityForResult(credential.newChooseAccountIntent(), REQUEST_ACCOUNT_PICKER);
   }
-}
+} */
