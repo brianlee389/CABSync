@@ -15,11 +15,12 @@ import org.joda.time.DateTime;
 
 public class CalendarAsyncTask extends AsyncTask<Void, Void, Boolean> {
 
-  final CalendarSampleActivity activity;
+  final CABMainActivity activity;
+  String error = null;
   final com.google.api.services.calendar.Calendar client;
   List<Event> events;
 
-  public CalendarAsyncTask(CalendarSampleActivity activity) {
+  public CalendarAsyncTask(CABMainActivity activity) {
     this.activity = activity;
     client = activity.client;
     events = null;
@@ -33,13 +34,10 @@ public class CalendarAsyncTask extends AsyncTask<Void, Void, Boolean> {
         else return false;
         return true;
     } catch (final GooglePlayServicesAvailabilityIOException availabilityException) {
-      activity.showGooglePlayServicesAvailabilityErrorDialog(
-          availabilityException.getConnectionStatusCode());
     } catch (UserRecoverableAuthIOException userRecoverableException) {
-      activity.startActivityForResult(
-          userRecoverableException.getIntent(), CalendarSampleActivity.REQUEST_AUTHORIZATION);
+      activity.startActivityForResult(userRecoverableException.getIntent(), CABMainActivity.REQUEST_AUTHORIZATION);
     } catch (IOException e) {
-		Toast.makeText(activity, e.getMessage(), Toast.LENGTH_SHORT).show();
+    	error = e.getMessage();
 	}
     return false;
   }
@@ -48,7 +46,7 @@ public class CalendarAsyncTask extends AsyncTask<Void, Void, Boolean> {
   protected void onPostExecute(Boolean success){
 	  if(success && events != null){
 		  activity.refreshView(events);
-	  }
+	  }else if(error != null) Toast.makeText(activity, error, Toast.LENGTH_SHORT).show();
   }
 
 }

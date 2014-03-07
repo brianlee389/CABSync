@@ -15,5 +15,7 @@
     <string name="reviewInfo">Enter review and when done press submit</string>
     <string name="reviewHint">Enter review here</string>
     <string name="createReview">Write review</string>
+    <string name="refresh">Refresh</string>
+    <string name="accounts">Accounts</string>
 
 </resources>
