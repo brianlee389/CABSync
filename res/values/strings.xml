@@ -10,7 +10,6 @@
     <string name="title_activity_event_main">EventMainActivity</string>
     <string name="addEventButton">Add to calendar</string>
     <string name="ratingInstruct">Been to this event? Click below to write a review!</string>
-    <string name="createReview">Write review</string>
     
     <string name="submit">submit</string>
     <string name="title_activity_review_main">ReviewMainActivity</string>
