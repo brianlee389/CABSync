@@ -1,4 +1,3 @@
-
 package com.example.drexelcabapp;
 
 import com.google.api.client.googleapis.extensions.android.gms.auth.GooglePlayServicesAvailabilityIOException;

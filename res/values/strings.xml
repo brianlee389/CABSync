@@ -1,11 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Drexel Cab App</string>
+    <string name="app_name">Drexel CAB App</string>
+    <string name="calendar_app_name">Calendar Sample Activity</string>
     <string name="action_settings">Settings</string>
-    <string name="hello_world">Hello world!</string>
-    <string name="error">Error</string>
-    <string name="error_format">[Error] %s</string>
-    <string name="refresh">Refresh</string>
-    <string name="accounts">Accounts</string>
+    <string name="hello_world">Event info goes here</string>
+    <string name="events_header">Events</string>
+    <string name="title_activity_event_main">EventMainActivity</string>
+    <string name="addEventButton">Add to calendar</string>
+    <string name="ratingInstruct">Been to this event? Click below to write a review!</string>
+    <string name="submit">submit</string>
+    <string name="title_activity_review_main">ReviewMainActivity</string>
+    <string name="ratingInfo">Enter rating</string>
+    <string name="reviewInfo">Enter review and when done press submit</string>
+    <string name="reviewHint">Enter review here</string>
+    <string name="createReview">Write review</string>
 
 </resources>

@@ -95,7 +95,7 @@ public final class CalendarSampleActivity extends Activity {
         
     Logger.getLogger("com.google.api.client").setLevel(LOGGING_LEVEL);
     // view and menu
-    setContentView(R.layout.calendarlist);
+    setContentView(R.id.list);
     listView = (ListView) findViewById(R.id.list);
     listView.setAdapter(adapter);
     adapter.setNotifyOnChange(true);
@@ -107,7 +107,8 @@ public final class CalendarSampleActivity extends Activity {
     client = new com.google.api.services.calendar.Calendar.Builder(
         transport, jsonFactory, credential).setApplicationName("sound-proposal-476")
         .build();
-  }
+    
+  }//end onCreate
 
   void showGooglePlayServicesAvailabilityErrorDialog(final int connectionStatusCode) {
     runOnUiThread(new Runnable() {
@@ -117,7 +118,7 @@ public final class CalendarSampleActivity extends Activity {
         dialog.show();
       }
     });
-  }
+  }//end showGooglePlayServices
 
   void refreshView(List<Event> events) {
 	 /* for(int i = 0; i < events.size(); i++){
@@ -176,10 +177,10 @@ public final class CalendarSampleActivity extends Activity {
   @Override
   public boolean onCreateOptionsMenu(Menu menu) {
     MenuInflater inflater = getMenuInflater();
-    inflater.inflate(R.menu.main_menu, menu);
+    inflater.inflate(R.menu.cabmain, menu);
     return super.onCreateOptionsMenu(menu);
   }
-
+/*
   @Override
   public boolean onOptionsItemSelected(MenuItem item) {
     switch (item.getItemId()) {
@@ -191,7 +192,7 @@ public final class CalendarSampleActivity extends Activity {
         return true;
     }
     return super.onOptionsItemSelected(item);
-  }
+  }*/
 
   /** Check that Google Play services APK is installed and up to date. */
   private boolean checkGooglePlayServicesAvailable() {
