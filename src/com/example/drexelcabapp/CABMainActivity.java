@@ -43,7 +43,7 @@ public class CABMainActivity extends Activity {
 				//Call a new activity's onCreate for that screen
 				Intent intent = new Intent(CABMainActivity.this,EventMainActivity.class);
 				startActivity(intent);
-				Toast.makeText(CABMainActivity.this, "Hello World", Toast.LENGTH_LONG).show();
+				Toast.makeText(CABMainActivity.this, "to EventMainActivity", Toast.LENGTH_LONG).show();
 			}
 		});{
 			

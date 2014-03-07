@@ -32,6 +32,7 @@ public class EventMainActivity extends Activity {
 			public void onClick(View v){
 				Intent intent = new Intent(EventMainActivity.this,ReviewMainActivity.class);
 				startActivity(intent);
+				Toast.makeText(EventMainActivity.this, "to ReviewMainActivity", Toast.LENGTH_SHORT).show();
 			}
 		}); 
 		

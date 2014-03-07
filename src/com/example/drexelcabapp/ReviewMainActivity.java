@@ -35,16 +35,18 @@ public class ReviewMainActivity extends Activity {
 			public void onRatingChanged(RatingBar ratingBar, float rating,
 					boolean fromUser) {
 				stars = rating;
-				Toast.makeText(ReviewMainActivity.this, String.valueOf(stars),
-						Toast.LENGTH_SHORT).show();
+				//Toast.makeText(ReviewMainActivity.this, String.valueOf(stars),
+					//	Toast.LENGTH_SHORT).show();
 			}
 		});
 
+		//Submit to cloudmine the rating,review, and event id
 		submit.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				String rating = String.valueOf(stars);
 				String text = review.getText().toString();
-				Toast.makeText(ReviewMainActivity.this, text, Toast.LENGTH_SHORT)
+				Toast.makeText(ReviewMainActivity.this, rating, Toast.LENGTH_SHORT)
 						.show();
 			}
 		});
