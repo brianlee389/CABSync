@@ -3,23 +3,18 @@ package com.example.drexelcabapp;
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.NotificationManager;
+import android.content.Intent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.RatingBar;
 import android.widget.Toast;
-import android.widget.RatingBar.OnRatingBarChangeListener;
 import android.support.v4.app.NavUtils;
 import android.support.v4.app.NotificationCompat;
 
 public class EventMainActivity extends Activity {
-	private Button addEvent, submit;
-	private RatingBar ratingBar;
-	private EditText review;
-	private float stars;
+	private Button addEvent, writeReview;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -29,27 +24,18 @@ public class EventMainActivity extends Activity {
 		setupActionBar();
 		
 		addEvent = (Button) findViewById(R.id.addEvent);
-		submit = (Button) findViewById(R.id.submitButton);
-		ratingBar = (RatingBar) findViewById(R.id.ratingBar);
-		review = (EditText) findViewById(R.id.review);
+		writeReview = (Button) findViewById(R.id.writeButton);
 		
-		//Rating bar listener
-		ratingBar.setOnRatingBarChangeListener(new OnRatingBarChangeListener() {
-			public void onRatingChanged(RatingBar ratingBar, float rating,
-					boolean fromUser) {
-					stars = rating;
-					Toast.makeText(EventMainActivity.this, String.valueOf(stars), Toast.LENGTH_SHORT).show();
-				}
-			});
-		
-		submit.setOnClickListener(new OnClickListener(){
+		//Press to go to review main activity
+		writeReview.setOnClickListener(new OnClickListener(){
 			@Override
 			public void onClick(View v){
-				String text = review.getText().toString();
-				Toast.makeText(EventMainActivity.this, text, Toast.LENGTH_SHORT).show();
+				Intent intent = new Intent(EventMainActivity.this,ReviewMainActivity.class);
+				startActivity(intent);
 			}
 		}); 
 		
+		//Add even to user google calendar and create notification
 		addEvent.setOnClickListener(new OnClickListener(){
 			@Override
 			public void onClick(View v){

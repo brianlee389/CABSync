@@ -26,17 +26,18 @@ public final class R {
         public static final int ic_menu_refresh=0x7f020002;
     }
     public static final class id {
-        public static final int action_settings=0x7f08000a;
-        public static final int addEvent=0x7f080004;
-        public static final int button1=0x7f080006;
-        public static final int editText1=0x7f080007;
-        public static final int instructions=0x7f080002;
+        public static final int action_settings=0x7f08000b;
+        public static final int addEvent=0x7f080002;
+        public static final int beenToEvent=0x7f080003;
         public static final int list=0x7f080001;
-        public static final int ratingBar1=0x7f080005;
-        public static final int submitButton=0x7f080003;
+        public static final int ratingBar=0x7f080006;
+        public static final int ratingInstructions=0x7f080005;
+        public static final int review=0x7f080008;
+        public static final int reviewInstructions=0x7f080009;
+        public static final int submit=0x7f080007;
         public static final int textView1=0x7f080000;
-        public static final int textView2=0x7f080008;
-        public static final int title_refresh_progress=0x7f080009;
+        public static final int title_refresh_progress=0x7f08000a;
+        public static final int writeButton=0x7f080004;
     }
     public static final class layout {
         public static final int activity_cabmain=0x7f030000;

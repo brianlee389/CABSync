@@ -14,30 +14,30 @@
         android:layout_height="wrap_content"
         android:text="@string/hello_world" />
 
-    <TextView
-        android:id="@+id/instructions"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/submitButton"
-        android:layout_alignLeft="@+id/addEvent"
-        android:text="@string/ratingInstruct" />
-
     <Button
         android:id="@+id/addEvent"
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/instructions"
+        android:layout_above="@+id/beenToEvent"
         android:layout_alignLeft="@+id/textView1"
         android:text="@string/addEventButton" />
 
     <Button
-        android:id="@+id/submitButton"
+        android:id="@+id/writeButton"
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/instructions"
+        android:layout_alignLeft="@+id/beenToEvent"
         android:layout_alignParentBottom="true"
         android:text="@string/createReview" />
+
+    <TextView
+        android:id="@+id/beenToEvent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/writeButton"
+        android:layout_alignLeft="@+id/addEvent"
+        android:text="@string/ratingInstruct" />
 
 </RelativeLayout>
