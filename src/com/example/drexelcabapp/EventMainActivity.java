@@ -17,6 +17,9 @@ import android.support.v4.app.NotificationCompat;
 public class EventMainActivity extends Activity {
 	private Button addEvent, writeReview;
 	private TextView eventSummary;
+	String title;
+	String dateTime;
+	String location;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +32,11 @@ public class EventMainActivity extends Activity {
 		writeReview = (Button) findViewById(R.id.writeButton);
 		eventSummary = (TextView)findViewById(R.id.textView1);
 		
-		eventSummary.setText(getIntent().getStringExtra("Event Description"));
+		title = getIntent().getStringExtra("Title");
+		dateTime = getIntent().getStringExtra("Date Time");
+		location = getIntent().getStringExtra("Location");
+		String desc = getIntent().getStringExtra("Event Description");
+		eventSummary.setText(title + "\n\n" + "When: "+dateTime + "\n\n" + "Where: "+location + "\n\n" + desc);
 		
 		//Press to go to review main activity
 		writeReview.setOnClickListener(new OnClickListener(){
@@ -61,8 +68,8 @@ public class EventMainActivity extends Activity {
 	    NotificationCompat.Builder mBuilder =
 	    	    new NotificationCompat.Builder(this)
 	    	    .setSmallIcon(R.drawable.ic_launcher)
-	    	    .setContentTitle("My notification")
-	    	    .setContentText("Hello World!")
+	    	    .setContentTitle(title)
+	    	    .setContentText("When: "+dateTime+" Where: "+location)
 	    	    .setAutoCancel(true);
 	    		
 	    

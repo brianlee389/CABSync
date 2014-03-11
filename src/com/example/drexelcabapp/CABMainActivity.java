@@ -96,7 +96,22 @@ public class CABMainActivity extends Activity {
 				//On click will move to another screen to display event in detail
 				//Call a new activity's onCreate for that screen
 				Intent intent = new Intent(CABMainActivity.this,EventMainActivity.class);
-				intent.putExtra("Event Description", adapter.getItem(position).getDescription());
+		        DateTimeFormatter formatter = DateTimeFormat.forPattern("MMMMMM dd, EEEEEEEE kk:mm");
+	        	DateTime time = new DateTime(adapter.getItem(position).getStart().getDateTime().getValue());
+				
+	        	intent.putExtra("Title", adapter.getItem(position).getSummary());
+				intent.putExtra("Date Time", time.toString(formatter));
+				if(adapter.getItem(position).getLocation() == null){
+
+					intent.putExtra("Location", "No Location");
+				}else{
+					intent.putExtra("Location", adapter.getItem(position).getLocation());
+				}
+				if(adapter.getItem(position).getDescription() == null){
+					intent.putExtra("Event Description", "No Description");
+				}else{
+					intent.putExtra("Event Description", adapter.getItem(position).getDescription());
+				}
 				startActivity(intent);
 				Toast.makeText(CABMainActivity.this, "to EventMainActivity", Toast.LENGTH_LONG).show();
 			}
@@ -108,6 +123,12 @@ public class CABMainActivity extends Activity {
 	}
 
 	void refreshView(List<Event> events) {
+		for(int i = 0; i < events.size(); i++){
+			if(events.get(i).getStart().getDateTime() == null){
+				events.remove(i);
+			}
+		}
+		
 		  Collections.sort(events, new EventComparer());
 		  adapter.clear();
 		  adapter.addAll(events);
