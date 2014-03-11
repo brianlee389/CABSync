@@ -46,8 +46,8 @@ public class ReviewMainActivity extends Activity {
 			public void onClick(View v) {
 				String rating = String.valueOf(stars);
 				String text = review.getText().toString();
-				Toast.makeText(ReviewMainActivity.this, rating, Toast.LENGTH_SHORT)
-						.show();
+				//Toast.makeText(ReviewMainActivity.this, rating, Toast.LENGTH_SHORT)
+						//.show();
 			}
 		});
 	}// end onCreate
