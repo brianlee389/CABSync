@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.support.v4.app.NavUtils;
 import android.support.v4.app.NotificationCompat;
+import android.text.method.ScrollingMovementMethod;
 
 public class EventMainActivity extends Activity {
 	private Button addEvent, writeReview;
@@ -37,6 +38,7 @@ public class EventMainActivity extends Activity {
 		location = getIntent().getStringExtra("Location");
 		String desc = getIntent().getStringExtra("Event Description");
 		eventSummary.setText(title + "\n\n" + "When: "+dateTime + "\n\n" + "Where: "+location + "\n\n" + desc);
+		eventSummary.setMovementMethod(new ScrollingMovementMethod());
 		getParent();
 		
 		//Press to go to review main activity

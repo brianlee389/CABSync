@@ -136,7 +136,7 @@ public class CABMainActivity extends Activity {
 	
 	void addToCalendar(){
 		try {
-			client.events().insert("primary", adapter.getItem(eventToChange));
+			if(eventToChange != -1) client.events().insert("primary", adapter.getItem(eventToChange));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
