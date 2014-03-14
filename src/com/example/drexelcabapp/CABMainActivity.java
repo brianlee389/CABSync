@@ -1,5 +1,6 @@
 package com.example.drexelcabapp;
 
+import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
 
@@ -7,6 +8,7 @@ import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
+import com.cloudmine.api.CMApiCredentials;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.api.client.extensions.android.http.AndroidHttp;
 import com.google.api.client.googleapis.extensions.android.gms.auth.GoogleAccountCredential;
@@ -35,7 +37,6 @@ import android.widget.Toast;
 import android.app.Dialog;
 
 
-
 public class CABMainActivity extends Activity {
 	public ArrayAdapter<Event> adapter;
 	private ListView listView;
@@ -43,14 +44,21 @@ public class CABMainActivity extends Activity {
 	static final int REQUEST_GOOGLE_PLAY_SERVICES = 0;
 	static final int REQUEST_AUTHORIZATION = 1;
 	static final int REQUEST_ACCOUNT_PICKER = 2;
+	static final int ADD_TO_USER_CALENDAR = 3;
 	final HttpTransport transport = AndroidHttp.newCompatibleTransport();
 	final JsonFactory jsonFactory = GsonFactory.getDefaultInstance();
 	GoogleAccountCredential credential;
 	com.google.api.services.calendar.Calendar client;
+	private int eventToChange = -1;
+	// Find this in your developer console
+	private static final String APP_ID = "597bc0a3b86e4768ac01c91d3bf4fdf5";
+	// Find this in your developer console
+	private static final String API_KEY = "1a2780bdc5394e16998e6bfd7895a926";
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+	    CMApiCredentials.initialize(APP_ID, API_KEY, getApplicationContext());
 		setContentView(R.layout.activity_cabmain);
 		//create ListView
 		listView = (ListView) findViewById(R.id.list);			
@@ -58,9 +66,9 @@ public class CABMainActivity extends Activity {
 		//Array Adapter    
 	    adapter = new ArrayAdapter<Event>(this, android.R.layout.simple_list_item_1) {
 
-	        DateTimeFormatter formatter = DateTimeFormat.forPattern("MMMMMM dd, EEEEEEEE");
+	      DateTimeFormatter formatter = DateTimeFormat.forPattern("MMMMMM dd, EEEEEEEE");
 
-	        @Override
+	      @Override
 	      public View getView(int position, View convertView, ViewGroup parent) {
 	        // by default it uses toString; override to use summary instead
 	        TextView view = (TextView) super.getView(position, convertView, parent);
@@ -84,7 +92,7 @@ public class CABMainActivity extends Activity {
 	    client = new com.google.api.services.calendar.Calendar.Builder(
 	        transport, jsonFactory, credential).setApplicationName("sound-proposal-476")
 	        .build();
-				
+			
 		//Intent intent = new Intent(this,CalendarSampleActivity.class);
 		//startActivity(intent);
 		//CalendarSampleActivity test = new CalendarSampleActivity();
@@ -95,14 +103,18 @@ public class CABMainActivity extends Activity {
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id){
 				//On click will move to another screen to display event in detail
 				//Call a new activity's onCreate for that screen
+				eventToChange = position;
 				Intent intent = new Intent(CABMainActivity.this,EventMainActivity.class);
 		        DateTimeFormatter formatter = DateTimeFormat.forPattern("MMMMMM dd, EEEEEEEE kk:mm");
-	        	DateTime time = new DateTime(adapter.getItem(position).getStart().getDateTime().getValue());
+		        try{
+		        	DateTime time = new DateTime(adapter.getItem(position).getStart().getDateTime().getValue());
+					intent.putExtra("Date Time", time.toString(formatter));
+		        }catch(Exception e){
+		        	intent.putExtra("Date Time", "No Date");
+		        }
 				
 	        	intent.putExtra("Title", adapter.getItem(position).getSummary());
-				intent.putExtra("Date Time", time.toString(formatter));
 				if(adapter.getItem(position).getLocation() == null){
-
 					intent.putExtra("Location", "No Location");
 				}else{
 					intent.putExtra("Location", adapter.getItem(position).getLocation());
@@ -112,7 +124,7 @@ public class CABMainActivity extends Activity {
 				}else{
 					intent.putExtra("Event Description", adapter.getItem(position).getDescription());
 				}
-				startActivity(intent);
+				startActivityForResult(intent, CABMainActivity.ADD_TO_USER_CALENDAR);
 				Toast.makeText(CABMainActivity.this, "to EventMainActivity", Toast.LENGTH_LONG).show();
 			}
 		});
@@ -121,18 +133,34 @@ public class CABMainActivity extends Activity {
 		CalendarAsyncTask  eventTask = new CalendarAsyncTask(this);
 		eventTask.execute();	
 	}
+	
+	void addToCalendar(){
+		try {
+			client.events().insert("primary", adapter.getItem(eventToChange));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
+		}
+	}
 
 	void refreshView(List<Event> events) {
 		for(int i = 0; i < events.size(); i++){
-			if(events.get(i).getStart().getDateTime() == null){
+			try{
+				String.valueOf(events.get(i).getStart().getDateTime().getValue());
+			}catch(Exception e){
+				events.remove(i);
+				i--;
+				if(i < 0) i = 0;
+			}
+			if(events.get(i).getSummary().contains("Week")){
 				events.remove(i);
 			}
 		}
 		
-		  Collections.sort(events, new EventComparer());
-		  adapter.clear();
-		  adapter.addAll(events);
-		  adapter.notifyDataSetChanged();
+		Collections.sort(events, new EventComparer());
+		adapter.clear();
+		adapter.addAll(events);
+		adapter.notifyDataSetChanged();
 	}
 
 	  @Override
@@ -193,6 +221,11 @@ public class CABMainActivity extends Activity {
 	            new CalendarAsyncTask(this).execute();
 	          }
 	        }
+	      case ADD_TO_USER_CALENDAR:
+	    	  if(resultCode == Activity.RESULT_OK){
+		    	  Toast.makeText(this, "GOT HERE", Toast.LENGTH_SHORT).show();
+	    		  addToCalendar();
+	    	  }
 	        break;
 	    }
 	  }

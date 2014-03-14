@@ -1,5 +1,7 @@
 package com.example.drexelcabapp;
 
+import com.cloudmine.api.SimpleCMObject;
+
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
@@ -18,6 +20,7 @@ public class ReviewMainActivity extends Activity {
 	private EditText review;
 	private Button submit;
 	private float stars;
+	private String title;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +32,7 @@ public class ReviewMainActivity extends Activity {
 		ratingBar = (RatingBar) findViewById(R.id.ratingBar);
 		review = (EditText) findViewById(R.id.review);
 		submit = (Button) findViewById(R.id.submit);
+		title = getIntent().getStringExtra("Title");
 
 		// Rating bar listener
 		ratingBar.setOnRatingBarChangeListener(new OnRatingBarChangeListener() {
@@ -46,8 +50,13 @@ public class ReviewMainActivity extends Activity {
 			public void onClick(View v) {
 				String rating = String.valueOf(stars);
 				String text = review.getText().toString();
-				//Toast.makeText(ReviewMainActivity.this, rating, Toast.LENGTH_SHORT)
-						//.show();
+				SimpleCMObject review = new SimpleCMObject();
+				review.add("Title", title);
+				review.add("Rating", rating);
+				review.add("Review", text);
+				review.save();
+				Toast.makeText(ReviewMainActivity.this, "Review Submitted", Toast.LENGTH_SHORT).show();
+				finish();
 			}
 		});
 	}// end onCreate
@@ -79,7 +88,7 @@ public class ReviewMainActivity extends Activity {
 			//
 			// http://developer.android.com/design/patterns/navigation.html#up-vs-back
 			//
-			NavUtils.navigateUpFromSameTask(this);
+			finish();
 			return true;
 		}
 		return super.onOptionsItemSelected(item);

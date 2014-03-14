@@ -20,6 +20,7 @@ public class EventMainActivity extends Activity {
 	String title;
 	String dateTime;
 	String location;
+	private CABMainActivity parent;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -31,18 +32,19 @@ public class EventMainActivity extends Activity {
 		addEvent = (Button) findViewById(R.id.addEvent);
 		writeReview = (Button) findViewById(R.id.writeButton);
 		eventSummary = (TextView)findViewById(R.id.textView1);
-		
 		title = getIntent().getStringExtra("Title");
 		dateTime = getIntent().getStringExtra("Date Time");
 		location = getIntent().getStringExtra("Location");
 		String desc = getIntent().getStringExtra("Event Description");
 		eventSummary.setText(title + "\n\n" + "When: "+dateTime + "\n\n" + "Where: "+location + "\n\n" + desc);
+		getParent();
 		
 		//Press to go to review main activity
 		writeReview.setOnClickListener(new OnClickListener(){
 			@Override
 			public void onClick(View v){
 				Intent intent = new Intent(EventMainActivity.this,ReviewMainActivity.class);
+				intent.putExtra("Title", title);
 				startActivity(intent);
 				Toast.makeText(EventMainActivity.this, "to ReviewMainActivity", Toast.LENGTH_SHORT).show();
 			}
@@ -53,7 +55,9 @@ public class EventMainActivity extends Activity {
 			@Override
 			public void onClick(View v){
 				Toast.makeText(EventMainActivity.this, "You added event to calendar", Toast.LENGTH_SHORT).show();
-				createNotification(v);
+				setResult(Activity.RESULT_OK);
+				finish();
+				//createNotification(v);
 			}
 		}); 
 	}//end onCreate
@@ -108,7 +112,7 @@ public class EventMainActivity extends Activity {
 			//
 			// http://developer.android.com/design/patterns/navigation.html#up-vs-back
 			//
-			NavUtils.navigateUpFromSameTask(this);
+			finish();
 			return true;
 		}
 		return super.onOptionsItemSelected(item);

@@ -28,8 +28,8 @@ public class CalendarAsyncTask extends AsyncTask<Void, Void, Boolean> {
   
   @Override
   protected final Boolean doInBackground(Void... ignored) {
-    try {
-        com.google.api.services.calendar.model.Events feed = client.events().list("7s5ln95p2m87ktqcql07ige7j4@group.calendar.google.com").setTimeMin(new com.google.api.client.util.DateTime(DateTime.now().toDate())).setMaxResults(15).execute();
+    try {																																																				//.setMaxResults(15)
+        com.google.api.services.calendar.model.Events feed = client.events().list("7s5ln95p2m87ktqcql07ige7j4@group.calendar.google.com").setTimeMin(new com.google.api.client.util.DateTime(DateTime.now().minusMonths(1).toDate())).execute();
         if(feed.getItems() != null) events = feed.getItems();
         else return false;
         return true;
