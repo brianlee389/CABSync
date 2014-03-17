@@ -1,0 +1,2 @@
+HOW TO RUN THIS PROJECT:
+	In the bin directory, there is an .apk file. Install this file onto an android device and then run the application on that device. You cannot use the emulator for this project, because it uses google play services.
