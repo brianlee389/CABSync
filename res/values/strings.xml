@@ -8,15 +8,15 @@
     
     <string name="events_header">Events</string>
     <string name="title_activity_event_main">EventMainActivity</string>
-    <string name="addEventButton">Add to calendar</string>
+    <string name="addEventButton">Add Event</string>
     <string name="ratingInstruct">Been to this event? Click below to write a review!</string>
     
-    <string name="submit">submit</string>
+    <string name="submit">Submit</string>
     <string name="title_activity_review_main">ReviewMainActivity</string>
-    <string name="ratingInfo">Enter rating</string>
-    <string name="reviewInfo">Enter review and when done press submit</string>
-    <string name="reviewHint">Enter review here</string>
-    <string name="createReview">Write review</string>
+    <string name="ratingInfo">Enter Rating</string>
+    <string name="reviewInfo">Enter Review and when done press Submit</string>
+    <string name="reviewHint">Enter Review Here</string>
+    <string name="createReview">Write Review</string>
     <string name="refresh">Refresh</string>
     <string name="accounts">Accounts</string>
 
